@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+matrixB = np.array([[1,4,2],[2,8,4],[3,2,1]])
+matrixB1 = np.array ([[1,4,2],[2,8,3],[1,4,1]])
+
+detB = np.linalg.det(matrixB)
+detB1 = np.linal.det (matrixB1)
+
+print (matrixB)
+print (detB)
+print ()
+print (matrixB1)
+print (detB1)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-8-24b06cd92a50>[0m in [0;36m<cell line: 6>[0;34m()[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0mdetB[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mlinalg[0m[0;34m.[0m[0mdet[0m[0;34m([0m[0mmatrixB[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 6[0;31m [0mdetB1[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mlinal[0m[0;34m.[0m[0mdet[0m [0;34m([0m[0mmatrixB1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0mprint[0m [0;34m([0m[0mmatrixB[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/numpy/__init__.py[0m in [0;36m__getattr__[0;34m(attr)[0m
+[1;32m    326[0m             [0;32mraise[0m [0mRuntimeError[0m[0;34m([0m[0;34m"Tester was removed in NumPy 1.25."[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    327[0m [0;34m[0m[0m
+[0;32m--> 328[0;31m         raise AttributeError("module {!r} has no attribute "
+[0m[1;32m    329[0m                              "{!r}".format(__name__, attr))
+[1;32m    330[0m [0;34m[0m[0m
+
+[0;31mAttributeError[0m: module 'numpy' has no attribute 'linal'
+
