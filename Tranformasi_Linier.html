@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>tranformasi linier &#8212; My sample book</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tranformasi_Linier';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="konsep eigenvalue dan eigen vektor" href="eigenvalueeigenvector.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -121,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -176,12 +177,15 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="sistem-linier.html">SISTEM LINEAR DAN METODE ELIMINASI GAUSSIAN</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Aljabar_Matrix.html">Aljabar Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrix-invers.html">Matriks Invers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Determinan.html">Determinan Matriks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eigenvalueeigenvector.html">konsep eigenvalue dan eigen vektor</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">tranformasi linier</a></li>
+
+
 </ul>
 
     </div>
@@ -367,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>tranformasi linier</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,7 +380,32 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">tranformasi linier</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuktikan-bahwa-t-u-v-t-u-t-v">membuktikan bahwa t(u+v) = t(u) + t(v)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-code">implementasi dengan code</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas"><strong>Tugas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-solusi">Langkah-langkah Solusi:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-vektor-dan-linear">1. Basis Vektor dan Linear:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menerapkan-transformasi-t-pada-basis-vektor">2. Menerapkan Transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ) pada Basis Vektor:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-informasi-tadi">3. Menggunakan Informasi tadi:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membentuk-matriks-transformasi-a">4. Membentuk Matriks Transformasi ( <span class="math notranslate nohighlight">\(A\)</span> ):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil">Hasil:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-refleksi"><strong>Matriks Refleksi</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi">Definisi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refleksi-di-2d">Refleksi di 2D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refleksi-di-3d">Refleksi di 3D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dalam-python">Implementasi dalam Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -389,7 +418,326 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="tranformasi-linier">
+<h1>tranformasi linier<a class="headerlink" href="#tranformasi-linier" title="Link to this heading">#</a></h1>
+<p>tranformasi linier adalah Transformasi linier umum adalah sebuah fungsi yang memetakan suatu ruang vector B ke suatu ruang vector C, sehingga variable A dinyatakan sebagai transformasi linier dari B ke C. Pernyataan tersebut ditunjukkan pada skema
+dibawah ini.:</p>
+<p>Jika A : B ke C</p>
+<p>Variabel akan disebut sebagai transformasi linier jika semua vector u dan v yang ada
+pada B
+dan semua scalar c, seperti :</p>
+<p>T(u + v) = T(u) + T(v)</p>
+<p>T(cu) = cT(u)</p>
+<section id="membuktikan-bahwa-t-u-v-t-u-t-v">
+<h2>membuktikan bahwa t(u+v) = t(u) + t(v)<a class="headerlink" href="#membuktikan-bahwa-t-u-v-t-u-t-v" title="Link to this heading">#</a></h2>
+<p>vektor u dan v
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}=\binom{1}{2}, \quad \mathbf{v}=\binom{2}{3}
+\)</span>$</p>
+<ul class="simple">
+<li><p>Hitung <span class="math notranslate nohighlight">\(\mathbf{u}+\mathbf{v}\)</span> :
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}+\mathbf{v}=\binom{1}{2}+\binom{2}{3}=\binom{3}{5}
+\)</span>$</p></li>
+<li><p>Terapkan transformasi identitas:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u}+\mathbf{v})=\mathbf{u}+\mathbf{v}=\binom{3}{5}
+\)</span>$</p></li>
+<li><p>Hitung <span class="math notranslate nohighlight">\(T(\mathbf{u})\)</span> dan <span class="math notranslate nohighlight">\(T(\mathbf{v})\)</span> :
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u})=\mathbf{u}=\binom{1}{2}, \quad T(\mathbf{v})=\mathbf{v}=\binom{2}{3}
+\)</span>$</p></li>
+<li><p>Jumlahkan hasilnya:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u})+T(\mathbf{v})=\binom{1}{2}+\binom{2}{3}=\binom{3}{5}
+\)</span>$</p></li>
+</ul>
+<p>Terlihat bahwa <span class="math notranslate nohighlight">\(T(\mathbf{u}+\mathbf{v})=T(\mathbf{u})+T(\mathbf{v})\)</span>.</p>
+<p>Contoh 2: Transformasi Skalar <span class="math notranslate nohighlight">\(k=2\)</span>
+Transformasi <span class="math notranslate nohighlight">\(T(\mathbf{x})=2 \mathbf{x}\)</span>.</p>
+<ul class="simple">
+<li><p>Vektor <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> dan <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> :
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}=\binom{1}{2}, \quad \mathbf{v}=\binom{2}{3}
+\)</span>$</p></li>
+<li><p>Hitung <span class="math notranslate nohighlight">\(\mathbf{u}+\mathbf{v}\)</span> :
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}+\mathbf{v}=\binom{1}{2}+\binom{2}{3}=\binom{3}{5}
+\)</span>$</p></li>
+<li><p>Terapkan transformasi skalar:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u}+\mathbf{v})=2\binom{3}{5}=\binom{6}{10}
+\)</span>$</p></li>
+<li><p>Hitung <span class="math notranslate nohighlight">\(T(\mathbf{u})\)</span> dan <span class="math notranslate nohighlight">\(T(\mathbf{v})\)</span> :
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u})=2\binom{1}{2}=\binom{2}{4}, \quad T(\mathbf{v})=2\binom{2}{3}=\binom{4}{6}
+\)</span>$</p></li>
+<li><p>Jumlahkan hasilnya:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u})+T(\mathbf{v})=\binom{2}{4}+\binom{4}{6}=\binom{6}{10}
+\)</span>$</p></li>
+</ul>
+<p>Terlihat bahwa <span class="math notranslate nohighlight">\(T(\mathbf{u}+\mathbf{v})=T(\mathbf{u})+T(\mathbf{v})\)</span>.</p>
+<p>Contoh 3: Rotasi 90 Derajat
+Transformasi rotasi 90 derajat searah jarum jam.</p>
+<ul class="simple">
+<li><p>Matriks transformasi rotasi 90 derajat:
+$<span class="math notranslate nohighlight">\(
+T=\left(\begin{array}{cc}
+0 &amp; 1 \\
+-1 &amp; 0
+\end{array}\right)
+\)</span>$</p></li>
+<li><p>Vektor <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> dan <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> :
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}=\binom{1}{2}, \quad \mathbf{v}=\binom{2}{3}
+\)</span>$</p></li>
+<li><p>Hitung <span class="math notranslate nohighlight">\(\mathbf{u}+\mathbf{v}\)</span> :
+$<span class="math notranslate nohighlight">\(
+\mathbf{u}+\mathbf{v}=\binom{1}{2}+\binom{2}{3}=\binom{3}{5}
+\)</span>$</p></li>
+<li><p>Terapkan transformasi rotasi:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u}+\mathbf{v})=\left(\begin{array}{cc}
+0 &amp; 1 \\
+-1 &amp; 0
+\end{array}\right)\binom{3}{5}=\binom{5}{-3}
+\)</span>$</p></li>
+<li><p>Hitung <span class="math notranslate nohighlight">\(T(\mathbf{u})\)</span> dan <span class="math notranslate nohighlight">\(T(\mathbf{v})\)</span> :
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+&amp; T(\mathbf{u})=\left(\begin{array}{cc}
+0 &amp; 1 \\
+-1 &amp; 0
+\end{array}\right)\binom{1}{2}=\binom{2}{-1} \\
+&amp; T(\mathbf{v})=\left(\begin{array}{cc}
+0 &amp; 1 \\
+-1 &amp; 0
+\end{array}\right)\binom{2}{3}=\binom{3}{-2}
+\end{aligned}
+\)</span>$</p></li>
+<li><p>Jumlahkan hasilnya:
+$<span class="math notranslate nohighlight">\(
+T(\mathbf{u})+T(\mathbf{v})=\binom{2}{-1}+\binom{3}{-2}=\binom{5}{-3}
+\)</span>$</p></li>
+</ul>
+<p>Terlihat bahwa <span class="math notranslate nohighlight">\(T(\mathbf{u}+\mathbf{v})=T(\mathbf{u})+T(\mathbf{v})\)</span>.</p>
+<p>Dari ketiga contoh di atas, kita melihat bagaimana sifat aditivitas <span class="math notranslate nohighlight">\(T(\mathbf{u}+\mathbf{v})=T(\mathbf{u})+T(\mathbf{v})\)</span> dipenuhi dalam konteks yang berbeda, memperkuat bahwa <span class="math notranslate nohighlight">\(T\)</span> adalah transformasi linier dalam masing-masing kasus.</p>
+</section>
+<section id="implementasi-dengan-code">
+<h2>implementasi dengan code<a class="headerlink" href="#implementasi-dengan-code" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Definisi vektor u dan v</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Transformasi identitas</span>
+<span class="k">def</span> <span class="nf">T_identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1"># Hitung T(u + v)</span>
+<span class="n">T_u_plus_v</span> <span class="o">=</span> <span class="n">T_identity</span><span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="c1"># Hitung T(u) + T(v)</span>
+<span class="n">T_u</span> <span class="o">=</span> <span class="n">T_identity</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">T_v</span> <span class="o">=</span> <span class="n">T_identity</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="n">T_u_plus_T_v</span> <span class="o">=</span> <span class="n">T_u</span> <span class="o">+</span> <span class="n">T_v</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T(u + v):&quot;</span><span class="p">,</span> <span class="n">T_u_plus_v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T(u) + T(v):&quot;</span><span class="p">,</span> <span class="n">T_u_plus_T_v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T(u + v): [3 5]
+T(u) + T(v): [3 5]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas">
+<h1><strong>Tugas</strong><a class="headerlink" href="#tugas" title="Link to this heading">#</a></h1>
+<p>Transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ) pada vektor-vektor (<span class="math notranslate nohighlight">\((2, 0)\)</span>) dan (<span class="math notranslate nohighlight">\((2, 2)\)</span>) diberikan:</p>
+<p>[
+<span class="math notranslate nohighlight">\(T(2, 0) = [-2, 0]\)</span>
+]
+[
+<span class="math notranslate nohighlight">\(T(2, 2) = [-2, 2]\)</span>
+]</p>
+<section id="langkah-langkah-solusi">
+<h2>Langkah-langkah Solusi:<a class="headerlink" href="#langkah-langkah-solusi" title="Link to this heading">#</a></h2>
+<section id="basis-vektor-dan-linear">
+<h3>1. Basis Vektor dan Linear:<a class="headerlink" href="#basis-vektor-dan-linear" title="Link to this heading">#</a></h3>
+<p>Untuk menemukan transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ), perlu menemukan ( <span class="math notranslate nohighlight">\(T\)</span> ) pada basis vektor ( <span class="math notranslate nohighlight">\(\mathbf{e}_1\)</span> ) dan ( <span class="math notranslate nohighlight">\(\mathbf{e}_2\)</span> ):</p>
+<p>[
+<span class="math notranslate nohighlight">\(\mathbf{e}_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad \mathbf{e}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>
+]</p>
+<p>Kita dapat menuliskan vektor (<span class="math notranslate nohighlight">\(\begin{pmatrix} 2 \\ 0 \end{pmatrix}\)</span>) dan (<span class="math notranslate nohighlight">\(\begin{pmatrix} 2 \\ 2 \end{pmatrix}\)</span>) sebagai kombinasi linear dari basis vektor:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix} 2 \\ 0 \end{pmatrix} = 2 \mathbf{e}_1\)</span>
+]
+[
+<span class="math notranslate nohighlight">\(\begin{pmatrix} 2 \\ 2 \end{pmatrix} = 2 \mathbf{e}_1 + 2 \mathbf{e}_2\)</span>
+]</p>
+</section>
+<section id="menerapkan-transformasi-t-pada-basis-vektor">
+<h3>2. Menerapkan Transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ) pada Basis Vektor:<a class="headerlink" href="#menerapkan-transformasi-t-pada-basis-vektor" title="Link to this heading">#</a></h3>
+<p>[
+<span class="math notranslate nohighlight">\(T(2\mathbf{e}_1) = 2T(\mathbf{e}_1)\)</span>
+]
+[
+<span class="math notranslate nohighlight">\(T(2\mathbf{e}_1 + 2\mathbf{e}_2) = 2T(\mathbf{e}_1) + 2T(\mathbf{e}_2)\)</span>
+]</p>
+</section>
+<section id="menggunakan-informasi-tadi">
+<h3>3. Menggunakan Informasi tadi:<a class="headerlink" href="#menggunakan-informasi-tadi" title="Link to this heading">#</a></h3>
+<p>( <span class="math notranslate nohighlight">\(T(2, 0) = [-2, 0]\)</span>), kita bisa menuliskan:</p>
+<p>[
+<span class="math notranslate nohighlight">\(T(2\mathbf{e}_1) = \begin{pmatrix} -2 \\ 0 \end{pmatrix}\)</span>
+]</p>
+<p>Karena ( <span class="math notranslate nohighlight">\(T\)</span> ) adalah linier, kita punya:</p>
+<p>[
+<span class="math notranslate nohighlight">\(2T(\mathbf{e}_1) = \begin{pmatrix} -2 \\ 0 \end{pmatrix} \implies T(\mathbf{e}_1) = \begin{pmatrix} -1 \\ 0 \end{pmatrix}\)</span>
+]</p>
+<p>Selanjutnya, diberikan ( <span class="math notranslate nohighlight">\(T(2, 2) = [-2, 2]\)</span> ):</p>
+<p>[
+<span class="math notranslate nohighlight">\(2T(\mathbf{e}_1) + 2T(\mathbf{e}_2) = \begin{pmatrix} -2 \\ 2 \end{pmatrix}\)</span>
+]</p>
+<p>Lalu Substitusikan ( <span class="math notranslate nohighlight">\(T(\mathbf{e}_1)\)</span> ):</p>
+<p>[
+<span class="math notranslate nohighlight">\(2 \begin{pmatrix} -1 \\ 0 \end{pmatrix} + 2T(\mathbf{e}_2) = \begin{pmatrix} -2 \\ 2 \end{pmatrix}\)</span>
+]</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix} -2 \\ 0 \end{pmatrix} + 2T(\mathbf{e}_2) = \begin{pmatrix} -2 \\ 2 \end{pmatrix}\)</span>
+]</p>
+<p>[
+<span class="math notranslate nohighlight">\(2T(\mathbf{e}_2) = \begin{pmatrix} 0 \\ 2 \end{pmatrix} \implies T(\mathbf{e}_2) = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>
+]</p>
+</section>
+<section id="membentuk-matriks-transformasi-a">
+<h3>4. Membentuk Matriks Transformasi ( <span class="math notranslate nohighlight">\(A\)</span> ):<a class="headerlink" href="#membentuk-matriks-transformasi-a" title="Link to this heading">#</a></h3>
+<p>Dengan ( <span class="math notranslate nohighlight">\(T(\mathbf{e}_1)\)</span> ) dan ( <span class="math notranslate nohighlight">\(T(\mathbf{e}_2\)</span>) ), kita bisa bentuk matriks ( <span class="math notranslate nohighlight">\(A\)</span> ):</p>
+<p>[
+<span class="math notranslate nohighlight">\(A = \begin{pmatrix} T(\mathbf{e}_1) &amp; T(\mathbf{e}_2) \end{pmatrix} = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>
+]</p>
+</section>
+</section>
+<section id="hasil">
+<h2>Hasil:<a class="headerlink" href="#hasil" title="Link to this heading">#</a></h2>
+<p>Transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ) pada basis vektor ( <span class="math notranslate nohighlight">\(\mathbf{e}_1\)</span> ) dan ( <span class="math notranslate nohighlight">\(\mathbf{e}_2\)</span> ) ditemukan dan matriks ( <span class="math notranslate nohighlight">\(A\)</span> ) yang merepresentasikan transformasi linier ( <span class="math notranslate nohighlight">\(T\)</span> ) adalah:</p>
+<p>[
+<span class="math notranslate nohighlight">\(A = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>
+]</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="matriks-refleksi">
+<h1><strong>Matriks Refleksi</strong><a class="headerlink" href="#matriks-refleksi" title="Link to this heading">#</a></h1>
+<section id="definisi">
+<h2>Definisi<a class="headerlink" href="#definisi" title="Link to this heading">#</a></h2>
+<p>Refleksi atau pencerminan dalam konteks transformasi linier merujuk pada suatu transformasi geometri yang “mencerminkan” setiap titik dari suatu objek terhadap suatu garis (di 2D) atau suatu bidang (di 3D), menghasilkan gambar cerminnya. Transformasi ini adalah contoh dari transformasi linier yang dapat direpresentasikan menggunakan matriks.</p>
+<section id="refleksi-di-2d">
+<h3>Refleksi di 2D<a class="headerlink" href="#refleksi-di-2d" title="Link to this heading">#</a></h3>
+<p>Refleksi di bidang dua dimensi dapat dilakukan terhadap sumbu x, sumbu y, garis y = x, atau garis y = -x. Matriks transformasi untuk refleksi tersebut adalah sebagai berikut:</p>
+<p><strong>1. Refleksi terhadap sumbu x</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   1 &amp; 0 \\
+   0 &amp; -1
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y) menjadi (x, -y).</p>
+<p><strong>2. Refleksi terhadap sumbu y</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   -1 &amp; 0 \\
+   0 &amp; 1
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y) menjadi (-x, y).</p>
+<p><strong>3. Refleksi terhadap garis y = x</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   0 &amp; 1 \\
+   1 &amp; 0
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y) menjadi (y, x).</p>
+<p><strong>4. Refleksi terhadap garis y = -x</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   0 &amp; -1 \\
+   -1 &amp; 0
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y) menjadi (-y, -x).</p>
+</section>
+<section id="refleksi-di-3d">
+<h3>Refleksi di 3D<a class="headerlink" href="#refleksi-di-3d" title="Link to this heading">#</a></h3>
+<p>Refleksi di ruang tiga dimensi dilakukan terhadap salah satu bidang koordinat (xy, xz, atau yz). Ada beberapa matriks transformasi untuk refleksi tersebut sebagai berikut:</p>
+<p><strong>1. Refleksi terhadap bidang xy</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   1 &amp; 0 &amp; 0 \\
+   0 &amp; 1 &amp; 0 \\
+   0 &amp; 0 &amp; -1
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y, z) menjadi (x, y, -z).</p>
+<p><strong>2. Refleksi terhadap bidang xz</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   1 &amp; 0 &amp; 0 \\
+   0 &amp; -1 &amp; 0 \\
+   0 &amp; 0 &amp; 1
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y, z) menjadi (x, -y, z).</p>
+<p><strong>3. Refleksi terhadap bidang yz</strong>:</p>
+<p>[
+<span class="math notranslate nohighlight">\(\begin{pmatrix}
+   -1 &amp; 0 &amp; 0 \\
+   0 &amp; 1 &amp; 0 \\
+   0 &amp; 0 &amp; 1
+   \end{pmatrix}\)</span>
+]
+Mengubah koordinat (x, y, z) menjadi (-x, y, z).</p>
+</section>
+<section id="implementasi-dalam-python">
+<h3>Implementasi dalam Python<a class="headerlink" href="#implementasi-dalam-python" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Matriks refleksi terhadap sumbu y</span>
+<span class="n">reflection_matrix_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># Titik yang akan dicerminkan</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Melakukan refleksi</span>
+<span class="n">reflected_point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">reflection_matrix_y</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Titik asli:&quot;</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Titik hasil refleksi:&quot;</span><span class="p">,</span> <span class="n">reflected_point</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titik asli: [3 4]
+Titik hasil refleksi: [-3  4]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -420,6 +768,15 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="eigenvalueeigenvector.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">konsep eigenvalue dan eigen vektor</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -435,7 +792,32 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">tranformasi linier</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuktikan-bahwa-t-u-v-t-u-t-v">membuktikan bahwa t(u+v) = t(u) + t(v)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dengan-code">implementasi dengan code</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas"><strong>Tugas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-solusi">Langkah-langkah Solusi:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-vektor-dan-linear">1. Basis Vektor dan Linear:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menerapkan-transformasi-t-pada-basis-vektor">2. Menerapkan Transformasi ( <span class="math notranslate nohighlight">\(T\)</span> ) pada Basis Vektor:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-informasi-tadi">3. Menggunakan Informasi tadi:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membentuk-matriks-transformasi-a">4. Membentuk Matriks Transformasi ( <span class="math notranslate nohighlight">\(A\)</span> ):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil">Hasil:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matriks-refleksi"><strong>Matriks Refleksi</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi">Definisi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refleksi-di-2d">Refleksi di 2D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#refleksi-di-3d">Refleksi di 3D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-dalam-python">Implementasi dalam Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
